@@ -1,10 +1,13 @@
-# WhatsOn_v4
-New development of backend and frontend for Whatson
+# WhatsON_app_new_v3
 
+set environment development--
+export FLASK_ENV=development
 
-Front end
-Angular dev
+set database uri--
+export DATABASE_URI="database_uri"
 
-Backend
+set app settings--
+export APP_SETTINGS="config.DevelopmentConfig"
 
-Flaks-REST api
+start flask application--
+flask run

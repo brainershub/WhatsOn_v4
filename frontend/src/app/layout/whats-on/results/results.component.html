@@ -1,0 +1,370 @@
+<app-default-new-layout></app-default-new-layout>
+<div class="resultBack">
+  <div class="row">
+    <div class="col-md-1 px-md-1"></div>
+    <h1 class="headng">Summary</h1>
+  </div>
+  -->
+  <div class="row">
+    <div class="col-md-1 px-md-1"></div>
+    <div class="col-md-4 px-md-1">
+      <table class="table table-bordered table-striped table-sm">
+        <tbody>
+          <tr style="padding-top: 50px">
+            <br />
+            <div class="row">
+              <div class="col-md-1 px-md-1"></div>
+              <h4 class="otherAuthor">
+                Total number of articles : {{ articleLength }}
+              </h4>
+            </div>
+
+            <div class="row">
+              <div class="col-md-1 px-md-1"></div>
+              <h4 class="otherAuthor">
+                Total number of authors : {{ authorCount }}
+              </h4>
+            </div>
+
+            <div class="row">
+              <div class="col-md-1 px-md-1"></div>
+              <h4 class="otherAuthor">
+                Total number of sources : {{ sourceCount }}
+              </h4>
+            </div>
+            -->
+
+            <div *ngIf="isPos" class="row">
+              <div class="col-md-1 px-md-1"></div>
+              <h5 class="otherAuthor">Positive Words : {{ inputPosWord }}</h5>
+            </div>
+
+            <div *ngIf="isNeg" class="row">
+              <div class="col-md-1 px-md-1"></div>
+              <h5 class="otherAuthor">Negative Words : {{ inputNegWord }}</h5>
+            </div>
+
+            <div *ngIf="isauthor" class="row">
+              <div class="col-md-1 px-md-1"></div>
+              <h5 class="otherAuthor">Authors : {{ inputAuthor }}</h5>
+            </div>
+
+            <div *ngIf="islbone" class="row">
+              <div class="col-md-1 px-md-1"></div>
+              <h5 class="otherAuthor">First Label : {{ inputLbOne }}</h5>
+            </div>
+
+            <div *ngIf="islbtwo" class="row">
+              <div class="col-md-1 px-md-1"></div>
+              <h5 class="otherAuthor">Second Label : {{ inputLbTwo }}</h5>
+            </div>
+
+            <div *ngIf="islbthree" class="row">
+              <div class="col-md-1 px-md-1"></div>
+              <h5 class="otherAuthor">Third Label : {{ inputLbThree }}</h5>
+            </div>
+
+            <div *ngIf="isstartdate" class="row">
+              <div class="col-md-1 px-md-1"></div>
+              <h5 class="otherAuthor">Start Date : {{ inputStDate }}</h5>
+            </div>
+
+            <div *ngIf="isenddate" class="row">
+              <div class="col-md-1 px-md-1"></div>
+              <h5 class="otherAuthor">End Date : {{ inputEnDate }}</h5>
+            </div>
+            <br />
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- <div class="row">
+                    <div class=" col-md-1 px-md-1"></div>
+                    <div class=" col-md-10 px-md-1">
+                        
+                
+                          <div id="summaryChartContainer" style="height: 370px; width: 100%; margin-left:auto;margin-right:auto;"></div>
+                    </div>
+                    
+                </div> -->
+
+  <br />
+
+  <div class="row">
+    <div class="col-md-1 px-md-1"></div>
+    <h1 class="headng">Articles Overtime</h1>
+  </div>
+  <br /><br />
+  <div class="row">
+    <div class="col-md-1 px-md-1"></div>
+    <div class="col-md-10 px-md-1">
+      <div
+        id="chartContainer"
+        style="
+          height: 370px;
+          width: 100%;
+          margin-left: auto;
+          margin-right: auto;
+        "
+      ></div>
+    </div>
+  </div>
+  <hr class="firstline" />
+  <div class="row">
+    <div class="col-md-1 px-md-1"></div>
+    <div class="col-md-10 px-md-1">
+      <div id="container"></div>
+    </div>
+    <div class="col-md-1 px-md-1"></div>
+  </div>
+  <!-- <hr class="firstline" />
+  <div class="row">
+    <div class="col-md-3 px-md-1"></div>
+    <div class="col-md-6 px-md-1">
+      <button
+        type="button"
+        (click)="generteNetworkGraph()"
+        class="btn btn-block btn-success btn-more"
+      >
+        View Network Graph
+      </button>
+    </div>
+    <div class="col-md-3 px-md-1"></div>
+  </div> -->
+  <hr style="background-color: goldenrod" />
+  <div class="row">
+    <div class="col-md-1 px-md-1"></div>
+    <div class="col-md-5 px-md-1">
+      <h1 class="headng">Author ranking</h1>
+      <table class="table table-bordered table-striped table-sm">
+        <thead>
+          <tr>
+            <th class="tblhdr">Author Name</th>
+            <th class="tblhdr">Number of articles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let i of authorResult
+                | slice
+                  : (authorpage - 1) * authorpageSize
+                  : authorpage * authorpageSize
+            "
+          >
+            <td class="tblbdy">{{ i[0] }}</td>
+            <td class="tblbdy">{{ i[1] }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col-md-1 px-md-1"></div>
+        <div class="col-md-10 px-md-1">
+          <div class="card-footer" class="pagn">
+            <ngb-pagination
+              [(page)]="authorpage"
+              [pageSize]="authorpageSize"
+              [collectionSize]="authorCount"
+              [maxSize]="5"
+            ></ngb-pagination>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 px-md-1"></div>
+        <div class="col-md-8 px-md-1">
+          <button
+            [disabled]="isAuthorEnable"
+            type="button"
+            (click)="generteGraph()"
+            class="btn btn-block btn-success btn-more"
+          >
+            Author Graph
+          </button>
+        </div>
+        <div class="col-md-2 px-md-1"></div>
+      </div>
+    </div>
+
+    <div class="col-md-5 px-md-1">
+      <h1 class="headng">Source ranking</h1>
+      <table class="table table-bordered table-striped table-sm">
+        <thead>
+          <tr>
+            <th class="tblhdr">Source Name</th>
+            <th class="tblhdr">Number of articles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let i of sourceResult
+                | slice
+                  : (sourcepage - 1) * sourcepageSize
+                  : sourcepage * sourcepageSize
+            "
+          >
+            <td class="tblbdy">{{ i[0] }}</td>
+            <td class="tblbdy">{{ i[1] }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col-md-1 px-md-1"></div>
+        <div class="col-md-10 px-md-1">
+          <div class="card-footer" class="pagn">
+            <ngb-pagination
+              class="pagn"
+              [(page)]="sourcepage"
+              [pageSize]="sourcepageSize"
+              [collectionSize]="sourceCount"
+              [maxSize]="5"
+            ></ngb-pagination>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 px-md-1"></div>
+        <div class="col-md-8 px-md-1">
+          <button
+            [disabled]="isSourceEnable"
+            type="button"
+            (click)="generteSourceGraph()"
+            class="btn btn-block btn-success btn-more"
+          >
+            Source Graph
+          </button>
+        </div>
+        <div class="col-md-2 px-md-1"></div>
+      </div>
+    </div>
+    <div class="col-md-1 px-md-1"></div>
+  </div>
+  <br /><br />
+  <hr style="background-color: goldenrod" />
+  <div class="row">
+    <div class="col-md-1 px-md-1"></div>
+    <div class="col-md-10 px-md-1">
+      <table>
+        <tbody>
+          <tr
+            *ngFor="
+              let i of otherResults
+                | slice
+                  : (otherpage - 1) * otherpageSize
+                  : otherpage * otherpageSize
+            "
+          >
+            <td>
+              <h3 class="otherTitle">Title: {{ i.title }}</h3>
+              <h4 class="otherAuthor">Author: {{ i.author }}</h4>
+              <h5 class="otherAuthor">Published Date: {{ i.content_date }}</h5>
+              <h5 class="otherSummaryHead">Summary:</h5>
+              <p class="otherSummarybody">{{ i.summary }}</p>
+              <h5 class="otherUrl">URL: {{ i.url }}</h5>
+              <button
+                (click)="open(content, i)"
+                type="button"
+                class="btn btn-block btn-success btn-more"
+              >
+                View Full Article
+              </button>
+              <hr style="background-color: cadetblue" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col-md-5 px-md-1">
+          <ngb-pagination
+            class="pagn"
+            [(page)]="otherpage"
+            [pageSize]="otherpageSize"
+            [collectionSize]="otherCount"
+            [maxSize]="5"
+          ></ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-1 px-md-1"></div>
+    <div class="col-md-10 px-md-1"></div>
+  </div>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title mdTitle" id="modal-basic-title">
+        Full Article Text
+      </h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <h6>{{ text }}</h6>
+    </div>
+  </ng-template>
+
+  <ng-template #TopAuthorContent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title mdTitle topAuthors" id="modal-basic-title">
+        Top Five Authors
+      </h4>
+      <button
+        type="button"
+        class="close btn-danger"
+        aria-label="Close "
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <table class="table table-sm">
+        <tbody>
+          <tr *ngFor="let i of topAuthorarray">
+            <td class="topAuthors">{{ i.index + 1 }}</td>
+            <td class="topAuthors">{{ i.author }}</td>
+            <td>
+              <button
+                class="btn btn-block btn-success btn-more"
+                (click)="openAuthorGrowth(authorGrowthContent, i.index)"
+              >
+                View Graph
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- <div class="row" id="growthChart"></div>
+      <div class="row" id="growthChartTwo"></div> -->
+    </div>
+  </ng-template>
+
+  <ng-template #authorGrowthContent let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title mdTitle topAuthors" id="modal-basic-title">
+        Author Growth Graph
+      </h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row" id="growthChart"></div>
+    </div>
+  </ng-template>
+</div>
