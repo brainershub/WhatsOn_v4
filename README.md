@@ -1,4 +1,4 @@
-# WhatsON_app_new_v3
+# WhatsON_app
 
 set environment development--
 export FLASK_ENV=development
